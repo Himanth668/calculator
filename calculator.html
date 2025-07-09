@@ -45,6 +45,107 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div><style>body{
+    color: white;
+    background: rgb(167, 127, 207) ;
+    padding: 20px 400px;
+    font-size: 20px;
+
+}
+.cointer{
+    padding: 50px 10px;
+    text-align: center;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    background: rgb(211, 12, 191);
+}
+.items{
+    padding: 8px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    list-style: none;
+    text-decoration: none;  
+}
+input{
+    width:75%;
+    height:20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+li{
+    list-style: none;
+    padding: 8px;
+}
+button:hover{
+    background: rgb(167, 127, 207);
+}
+button{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    column-gap: 8px;
+    font-size: 20px;
+    margin: auto;
+    cursor: pointer;
+}
+.operator{
+    background: #ec9b04;
+    font-size: 24px;
+}</style><script>let currentInput = '';
+let currentOperation = '';
+let previousInput = '';
+function appendNumber(number){
+  currentInput += number;
+  document.getElementById('display').value = `${previousInput} ${currentOperation} ${currentInput}`;
+}
+
+function appendoperator(operation){
+  if (currentInput === '') return;
+  if (previousInput !== ''){
+    returnResult();
+  }
+  previousInput = currentInput;
+  currentOperation = operation;
+  currentInput = '';
+  document.getElementById('display').value = 
+`${previousInput} ${currentOperation}`;
+}
+
+function retrn(){
+  if (previousInput === '' || currentInput === '') return;
+  let result;
+  let prev = parseFloat(previousInput);
+  let current = parseFloat(currentInput);
+  switch (currentOperation){
+    case '+':
+      result = prev + current;
+      break;
+    case '-':
+      result = prev - current;
+      break;
+    case '*':
+      result = prev * current;
+      break;
+    case '/':
+      result = prev / current;
+      break;
+    default:
+      return;
+  }
+  currentInput = result.toString();
+  currentOperation = '';
+  previousInput = '';
+  document.getElementById('display').value = currentInput;
+}
+
+function cleardisplay(){
+  currentInput = '';
+  currentOperation = '';
+  previousInput = '';
+  document.getElementById('display').value = '0';
+}
+</script>
 </body>
 </html>
